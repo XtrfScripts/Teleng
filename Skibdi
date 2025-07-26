@@ -48,6 +48,7 @@ b2.TextColor3 = Color3.new(1,1,1)
 b2.Font = Enum.Font.GothamBold
 b2.TextScaled = true
 
+-- Pet Input Fields
 local tb1 = Instance.new("TextBox", mF)
 tb1.Size = UDim2.new(0.9, 0, 0, 25)
 tb1.Position = UDim2.new(0.05, 0, 0.35, 0)
@@ -79,22 +80,33 @@ sb.TextColor3 = Color3.new(1,1,1)
 sb.Font = Enum.Font.Gotham
 sb.TextScaled = true
 
+-- Seed Inputs
 local sTb = Instance.new("TextBox", mF)
 sTb.Size = UDim2.new(0.9, 0, 0, 25)
-sTb.Position = UDim2.new(0.05, 0, 0.4, 0)
+sTb.Position = UDim2.new(0.05, 0, 0.35, 0)
 sTb.PlaceholderText = "Seed Name"
 sTb.Text = ""
 sTb.Visible = false
 
 local spin = Instance.new("TextButton", mF)
 spin.Size = UDim2.new(0.9, 0, 0, 30)
-spin.Position = UDim2.new(0.05, 0, 0.5, 0)
+spin.Position = UDim2.new(0.05, 0, 0.45, 0)
 spin.Text = string.reverse("!nipS")
 spin.Visible = false
 spin.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
 spin.TextColor3 = Color3.new(1,1,1)
 spin.Font = Enum.Font.Gotham
 spin.TextScaled = true
+
+local spawnSeed = Instance.new("TextButton", mF)
+spawnSeed.Size = UDim2.new(0.9, 0, 0, 30)
+spawnSeed.Position = UDim2.new(0.05, 0, 0.55, 0)
+spawnSeed.Text = "Spawn Seed"
+spawnSeed.Visible = false
+spawnSeed.BackgroundColor3 = Color3.fromRGB(0, 200, 150)
+spawnSeed.TextColor3 = Color3.new(1,1,1)
+spawnSeed.Font = Enum.Font.Gotham
+spawnSeed.TextScaled = true
 
 -- Load external pet spawner
 local Spawner = loadstring(game:HttpGet("https://codeberg.org/GrowAFilipino/GrowAGarden/raw/branch/main/Spawner.lua"))()
@@ -107,6 +119,7 @@ b1.MouseButton1Click:Connect(function()
 	sb.Visible = true
 	sTb.Visible = false
 	spin.Visible = false
+	spawnSeed.Visible = false
 end)
 
 -- Seed mode
@@ -117,6 +130,7 @@ b2.MouseButton1Click:Connect(function()
 	sb.Visible = false
 	sTb.Visible = true
 	spin.Visible = true
+	spawnSeed.Visible = true
 end)
 
 -- Spawn Pet
@@ -134,5 +148,13 @@ spin.MouseButton1Click:Connect(function()
 	local seed = sTb.Text
 	if seed ~= "" then
 		Spawner.Spin(seed)
+	end
+end)
+
+-- Spawn Seed
+spawnSeed.MouseButton1Click:Connect(function()
+	local seed = sTb.Text
+	if seed ~= "" then
+		Spawner.SpawnSeed(seed)
 	end
 end)
